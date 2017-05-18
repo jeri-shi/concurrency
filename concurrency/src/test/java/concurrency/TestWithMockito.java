@@ -17,21 +17,31 @@ import static org.mockito.Mockito.when;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InOrder;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 public class TestWithMockito {
+  
+  @Mock
+  private List<String> listMock;
   
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
+  @Before
+  public void initMocks() {
+    MockitoAnnotations.initMocks(this);
+  }
+  
   @Test
   public void testBehavior() {
-    @SuppressWarnings("unchecked")
-    List<String> mList = mock(List.class);
+    List<String> mList = listMock;
     
     mList.add("one");
     mList.clear();
@@ -105,8 +115,7 @@ public class TestWithMockito {
   
   @Test
   public void testVerifyInOrder() {
-    @SuppressWarnings("unchecked")
-    List<String> list = mock(List.class);
+    List<String> list = listMock;
     
     list.add("First");
     list.add("Second");
@@ -116,16 +125,16 @@ public class TestWithMockito {
     inOrder.verify(list).add("First");
     inOrder.verify(list).add("Second");
     
-    @SuppressWarnings("unchecked")
-    List<String> list1 = mock(List.class);
+    
+    List<String> list1 = listMock;
     List<String> list2 = mock(List.class);
     
-    list1.add("First");
-    list2.add("Second");
+    list1.add("3rd");
+    list2.add("4th");
     
     InOrder inorder = Mockito.inOrder(list1, list2);
-    inorder.verify(list1).add("First");
-    inorder.verify(list2).add("Second");
+    inorder.verify(list1).add("3rd");
+    inorder.verify(list2).add("4th");
     
     
   }
