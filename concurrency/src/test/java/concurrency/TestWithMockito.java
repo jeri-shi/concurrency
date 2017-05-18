@@ -54,6 +54,22 @@ public class TestWithMockito {
   }
 
   @Test
+  public void testBehaviorBDD() {
+    //given
+    List<String> mList = listMock;
+    given(mList.add("one")).willReturn(true);
+    
+    //when
+    mList.add("one");
+    mList.clear();
+
+    //then
+    then(mList).should(times(1)).add("one");
+    then(mList).should(atLeastOnce()).clear();
+
+  }
+
+  @Test
   public void testLinkedList() {
     @SuppressWarnings("unchecked")
     LinkedList<String> list = mock(LinkedList.class);
@@ -62,6 +78,25 @@ public class TestWithMockito {
     when(list.get(1)).thenThrow(new IllegalArgumentException(""));
 
     assertThat(list.get(0), equalTo("Frist"));
+    thrown.expect(IllegalArgumentException.class);
+    list.get(1);
+
+  }
+  
+  @Test
+  public void testLinkedListBDD() {
+    @SuppressWarnings("unchecked")
+    LinkedList<String> list = mock(LinkedList.class);
+    
+    //given
+    given(list.get(0)).willReturn("Frist");
+    given(list.get(1)).willThrow(new IllegalArgumentException(""));
+    
+    //when
+    String s = list.get(0);
+    
+    //then
+    assertThat(s, equalTo("Frist"));
     thrown.expect(IllegalArgumentException.class);
     list.get(1);
 
