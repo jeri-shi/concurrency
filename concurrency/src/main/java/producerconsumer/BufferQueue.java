@@ -17,6 +17,9 @@ public class BufferQueue implements QueueInterface {
   private final Condition bufferFull = lock.newCondition();
   private final Condition bufferEmpty = lock.newCondition();
 
+  /**
+   * put a string into blocking queue
+   */
   public void put(String talk) throws InterruptedException {
     lock.lockInterruptibly();
     logger.trace("put method start..." + Thread.currentThread().getName());
