@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BufferQueue implements QueueInterface {
-
   private final static Logger logger = LogManager.getLogger(BufferQueue.class);
+
+  //Fixed length buffer
   private String[] buffer = new String[3];
   private int head, tail, count = 0;
   private final Lock lock = new ReentrantLock(true);
