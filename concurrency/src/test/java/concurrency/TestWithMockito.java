@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
@@ -163,6 +164,7 @@ public class TestWithMockito {
     String s3 = listMock.get(3);
     
     //then
+    then(listMock).should(times(3)).get(3);
     assertThat(s1, equalTo("1"));
     assertThat(s2, equalTo("2"));
     assertThat(s3, equalTo("3"));
