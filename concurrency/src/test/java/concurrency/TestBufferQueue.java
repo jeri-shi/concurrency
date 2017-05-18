@@ -34,23 +34,45 @@ public class TestBufferQueue {
   public void testPutAndGet() {
     BufferQueue queue = new BufferQueue();
     String[] talks = {"Hello", "World", "!"};
-    
+
     try {
       queue.put(talks[0]);
       queue.put(talks[1]);
       queue.put(talks[2]);
-      
+
       assertThat(queue.take(), equalTo(talks[0]));
       assertThat(queue.take(), equalTo(talks[1]));
       assertThat(queue.take(), equalTo(talks[2]));
-      
+
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    
-    
+
   }
-  
+
+  @Test
+  public void testPutAndGet2() {
+    BufferQueue queue = new BufferQueue();
+    String[] talks = {"Hello", "Concurrency", "World", "!"};
+
+    try {
+      queue.put(talks[0]);
+      queue.put(talks[1]);
+      queue.put(talks[2]);
+      assertThat(queue.take(), equalTo(talks[0]));
+      assertThat(queue.take(), equalTo(talks[1]));
+      assertThat(queue.take(), equalTo(talks[2]));
+
+      queue.put(talks[3]);
+      assertThat(queue.take(), equalTo(talks[3]));
+
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+
+  }
+
   @Test(timeout = 1500)
   public void testLongTime() {
     for (int i = 0; i < 10; i++) {
@@ -68,11 +90,11 @@ public class TestBufferQueue {
   public void testException() {
     thrown.expect(NullPointerException.class);
     String s = null;
-    
+
     if (s.equals("S")) {
-      
+
     }
-    
+
     if ("S".equals(null)) {
       if (null instanceof Object) {
         System.out.println(" d");
