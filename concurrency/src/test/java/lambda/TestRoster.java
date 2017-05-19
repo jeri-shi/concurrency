@@ -7,7 +7,9 @@ import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -130,6 +132,15 @@ public class TestRoster {
 
     // then
 
+  }
+  
+  @Test
+  public void testMethodReference() {
+    
+    Collections.sort((List<Person>)personList, Person::compareAge);
+    
+    Roster.processElement(personList, (Person p) -> {return true;}, (Person p) -> p.getName() + ":" + p.getGendar() + ":" + p.getAge(), (String person) -> System.out.println(person));
+    
   }
 
 }

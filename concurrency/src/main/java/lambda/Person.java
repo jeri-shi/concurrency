@@ -3,6 +3,7 @@ package lambda;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
 
 public class Person {
 
@@ -22,6 +23,10 @@ public class Person {
     this.emailAddress = email;
   }
 
+  public LocalDate getBirthday() {
+    return this.birthday;
+  }
+  
   public String getName() {
     return name;
   }
@@ -44,6 +49,10 @@ public class Person {
 
   public String printPerson() {
     return this.toString();
+  }
+  
+  public static int compareAge(Person a, Person b) {
+    return a.getBirthday().compareTo(b.getBirthday());
   }
 
 }
