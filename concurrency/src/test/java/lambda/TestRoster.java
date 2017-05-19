@@ -19,11 +19,12 @@ import lambda.Person.Sex;
 public class TestRoster {
 
   private Collection<Person> personList;
-  
+
   @Before
   public void init() {
     personList = new LinkedList<Person>();
-    personList.add(new Person("Zhang Shan", LocalDate.of(2001, 2, 3), Sex.FEMALE, "zhangsan@sss.com"));
+    personList
+        .add(new Person("Zhang Shan", LocalDate.of(2001, 2, 3), Sex.FEMALE, "zhangsan@sss.com"));
     personList.add(new Person("Li Si", LocalDate.of(1988, 9, 22), Sex.MALE, "lisi@sss.com"));
     personList.add(new Person("Wang wu", LocalDate.of(1990, 12, 30), Sex.FEMALE, "wangwu@sss.com"));
     personList.add(new Person("Zhao Liu", LocalDate.of(1983, 10, 3), Sex.MALE, "zhaoliu@sss.com"));
@@ -33,18 +34,14 @@ public class TestRoster {
   @Test
   public void testPrintPersonOlderThan() {
     // given
-//    List<Person> list = new ArrayList<Person>();
+    // List<Person> list = new ArrayList<Person>();
     Collection<Person> list = personList;
-    
-/*    Person p1 = mock(Person.class);
-    given(p1.getAge()).willReturn(Integer.valueOf(31), Integer.valueOf(25), Integer.valueOf(32),
-        Integer.valueOf(30), Integer.valueOf(18));
-    list.add(p1);
-    list.add(p1);
-    list.add(p1);
-    list.add(p1);
-    list.add(p1);
-*/
+
+    /*
+     * Person p1 = mock(Person.class); given(p1.getAge()).willReturn(Integer.valueOf(31),
+     * Integer.valueOf(25), Integer.valueOf(32), Integer.valueOf(30), Integer.valueOf(18));
+     * list.add(p1); list.add(p1); list.add(p1); list.add(p1); list.add(p1);
+     */
     int age = 30;
 
     // when
@@ -57,16 +54,13 @@ public class TestRoster {
   @Test
   public void testPrintPersonWithPredicate() {
     // given
-/*    List<Person> roster = new ArrayList<Person>();
-    Person p1 = mock(Person.class);
-    given(p1.getGendar()).willReturn(Sex.FEMALE, Sex.MALE, Sex.FEMALE, Sex.MALE, Sex.FEMALE);
-    given(p1.getAge()).willReturn(Integer.valueOf(21), Integer.valueOf(25), Integer.valueOf(32),
-        Integer.valueOf(30), Integer.valueOf(18));
-    roster.add(p1);
-    roster.add(p1);
-    roster.add(p1);
-    roster.add(p1);
-    roster.add(p1);*/
+    /*
+     * List<Person> roster = new ArrayList<Person>(); Person p1 = mock(Person.class);
+     * given(p1.getGendar()).willReturn(Sex.FEMALE, Sex.MALE, Sex.FEMALE, Sex.MALE, Sex.FEMALE);
+     * given(p1.getAge()).willReturn(Integer.valueOf(21), Integer.valueOf(25), Integer.valueOf(32),
+     * Integer.valueOf(30), Integer.valueOf(18)); roster.add(p1); roster.add(p1); roster.add(p1);
+     * roster.add(p1); roster.add(p1);
+     */
 
     Collection<Person> roster = personList;
     // when
@@ -124,6 +118,18 @@ public class TestRoster {
 
     // then
     assertThat(strGendar, equalTo("FEMALE"));
+  }
+
+  @Test
+  public void testProcessElement() {
+    // given personList is ready.
+
+    // when
+    Roster.processElement(personList, (Person p) -> p.getGendar() == Sex.FEMALE && p.getAge() > 30,
+        (Person p) -> p.getName() + ":" + p.getGendar() + ":" + p.getAge(), (String person) -> System.out.println(person));
+
+    // then
+
   }
 
 }

@@ -61,4 +61,8 @@ public class Roster {
 
     return ret;
   }
+  
+  public static <P, S> void processElement(Collection<P> collection, Predicate<P> filter, Function<P, S> mapper, Consumer<S> block) {
+    collection.stream().filter(filter).map(mapper).forEach(block);
+  }
 }
