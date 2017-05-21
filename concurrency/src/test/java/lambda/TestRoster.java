@@ -5,9 +5,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -143,4 +143,23 @@ public class TestRoster {
     
   }
 
+  @Test
+  public void testPrintElementNames() {
+    //given
+    //when
+    Roster.printPersonNames(personList);
+  }
+  
+  @Test
+  public void testGetAverageAge() {
+    //given a roster
+    DecimalFormat df = new DecimalFormat("##.00");
+    //when
+    double average = Roster.getAverageAge(personList, p -> true);
+    assertThat(df.format(average), equalTo("28.60"));
+    
+    average = Roster.getAverageAge(personList, p -> p.getGendar() == Sex.FEMALE);
+    assertThat(df.format(average), equalTo("27.33"));
+
+  }
 }

@@ -6,7 +6,7 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="bow" level="info" additivity="false">
+    <Logger name="lambda" level="info" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
     <Logger name="producerconsumer" level="trace" additivity="false">
