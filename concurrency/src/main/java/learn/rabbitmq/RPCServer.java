@@ -47,8 +47,9 @@ public class RPCServer {
             
             logger.info(" [.] fib("+message+")");
             response += fib(n);
+            Thread.sleep(10000);
             
-          }catch(RuntimeException e) {
+          }catch(RuntimeException | InterruptedException e) {
             logger.error(" [.] " + e.getMessage());
           }finally {
             channel.basicPublish("", properties.getReplyTo(), replyProps, response.getBytes("UTF-8"));
