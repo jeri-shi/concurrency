@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="5">
+<Configuration status="info" monitorInterval="5">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{DEFAULT} [%t] %-5level %logger{36}:%L - %msg%n"/>
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="lambda" level="info" additivity="false">
+    <Logger name="redis" level="info" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
     <Logger name="producerconsumer" level="trace" additivity="false">
