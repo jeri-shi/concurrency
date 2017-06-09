@@ -1,9 +1,7 @@
 package lambda;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Calendar;
 
 public class Person {
 
@@ -26,7 +24,7 @@ public class Person {
   public LocalDate getBirthday() {
     return this.birthday;
   }
-  
+
   public String getName() {
     return name;
   }
@@ -43,16 +41,21 @@ public class Person {
     LocalDate current = LocalDate.now();
     Period period = Period.between(birthday, current);
     return period.getYears();
-//    Duration duration = Duration.between(birthday, current);
-//    return (int) duration.toDays() / 365;
+    // Duration duration = Duration.between(birthday, current);
+    // return (int) duration.toDays() / 365;
   }
 
   public String printPerson() {
     return this.toString();
   }
-  
+
   public static int compareAge(Person a, Person b) {
     return a.getBirthday().compareTo(b.getBirthday());
+  }
+
+  @Override
+  public String toString() {
+    return name + "[" + gendar + "][" + getAge() + "][" + emailAddress + "]";
   }
 
 }
